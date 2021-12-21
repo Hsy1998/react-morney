@@ -1,3 +1,9 @@
+/*
+ * @Author: H.
+ * @Date: 2021-12-21 08:39:44
+ * @LastEditTime: 2021-12-21 17:10:30
+ * @Description: 
+ */
 import Layout from '../components/Layout';
 import React from 'react';
 import TagsSection from './Money/TagsSection';
@@ -14,25 +20,13 @@ function Money() {
   return (
     <MyLayout>
       <TagsSection>
-        <ol>
-          <li>衣</li>
-          <li>食</li>
-          <li>住</li>
-          <li>行</li>
-        </ol>
-        <button>新增标签</button>
+        
       </TagsSection>
       <NotesSection>
-        <label>
-          <span>备注</span>
-          <input type="text" placeholder="在这里添加备注" />
-        </label>
+        
       </NotesSection>
       <CategorySection>
-        <ul>
-          <li className="selected">支出</li>
-          <li>收入</li>
-        </ul>
+        
       </CategorySection>
       <NumberPadSection>
         <div className="output">100</div>
