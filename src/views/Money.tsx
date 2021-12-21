@@ -5,7 +5,7 @@
  * @Description: 
  */
 import Layout from '../components/Layout';
-import React from 'react';
+import React, { useState } from 'react';
 import TagsSection from './Money/TagsSection';
 import NotesSection from './Money/NotesSection';
 import CategorySection from './Money/CategorySection';
@@ -16,36 +16,33 @@ const MyLayout = styled(Layout)`
 display: flex;
 flex-direction: column;
 `
+
 function Money() {
+  const [selected, setSelected] = useState({
+    tags: [] as string[],
+    note: '',
+    category: '-' as "-" | "+",
+    amount: 0
+  })
+
+  // Partial --> 包含typeof selected部分类型
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({ ...selected, ...obj })
+  }
   return (
     <MyLayout>
-      <TagsSection>
-        
+      <TagsSection value={selected.tags}
+        onChange={(tags) => onChange({ tags })}>
       </TagsSection>
-      <NotesSection>
-        
+      <NotesSection value={selected.note}
+        onChange={(note) => onChange({ note })}>
       </NotesSection>
-      <CategorySection>
-        
+      <CategorySection value={selected.category}
+        onChange={(category) => onChange({ category })}>
       </CategorySection>
-      <NumberPadSection>
-        <div className="output">100</div>
-        <div className="pad clearfix">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>删除</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>清空</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button className="ok">OK</button>
-          <button className="zero">0</button>
-          <button className="dot">.</button>
-        </div>
+      <NumberPadSection value={selected.amount}
+        onOk={() => { }}
+        onChange={(amount) => onChange({ amount })}>
       </NumberPadSection>
     </MyLayout>
   );
