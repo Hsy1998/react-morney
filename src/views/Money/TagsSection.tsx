@@ -5,6 +5,7 @@
  * @Description: 
  */
 import { useTags } from "hooks/useTags";
+import { createId } from "lib/createId";
 import React from "react";
 import styled from "styled-components";
 
@@ -51,7 +52,7 @@ const TagsSection: React.FC<Props> = (props) => {
   const onAddTag = () => {
     const tagName = window.prompt('请输入新标签的名称')
     if (tagName !== null) {
-      setTags([...tags, {id: Math.random(),name:tagName}])
+      setTags([...tags, {id: createId(),name:tagName}])
     }
   }
 
