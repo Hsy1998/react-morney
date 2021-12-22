@@ -1,10 +1,17 @@
+/*
+ * @Author: H.
+ * @Date: 2021-12-21 08:39:44
+ * @LastEditTime: 2021-12-22 18:57:34
+ * @Description: 
+ */
 import React from 'react';
-import {HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Money from './views/Money';
 import Statistics from './views/Statistics';
 import Tags from './views/Tags';
 import NoMatch from './views/NoMatch';
 import styled from 'styled-components';
+import Tag from 'views/Tag';
 
 const AppWrapper = styled.div`
    color: #333;
@@ -13,23 +20,26 @@ const AppWrapper = styled.div`
 function App() {
   return (
     <AppWrapper>
-    <Router>
-      <Switch>
-        <Route path="/tags">
-          <Tags/>
-        </Route>
-        <Route path="/money">
-          <Money/>
-        </Route>
-        <Route path="/statistics">
-          <Statistics/>
-        </Route>
-        <Redirect exact from="/" to="/money"/>
-        <Route path="*">
-          <NoMatch/>
-        </Route>
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          <Route path="/tags" exact>
+            <Tags />
+          </Route>
+          <Route path="/tags/:tag" exact>
+            <Tag />
+          </Route>
+          <Route path="/money" exact>
+            <Money />
+          </Route>
+          <Route path="/statistics" exact>
+            <Statistics />
+          </Route>
+          <Redirect exact from="/" to="/money" />
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
     </AppWrapper>
   );
 }

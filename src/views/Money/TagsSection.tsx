@@ -1,10 +1,11 @@
 /*
  * @Author: H.
  * @Date: 2021-12-21 08:39:44
- * @LastEditTime: 2021-12-21 15:01:27
+ * @LastEditTime: 2021-12-22 18:27:59
  * @Description: 
  */
-import React, { useState } from "react";
+import { useTags } from "hooks/useTags";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.section`
@@ -45,7 +46,7 @@ type Props = {
   onChange: (selected: string[]) => void // 父组件更新标签
 }
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行'])
+  const {tags, setTags} = useTags()
   const onAddTag = () => {
     const tagName = window.prompt('请输入新标签的名称')
     if (tagName !== null) {
