@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-22 18:26:01
- * @LastEditTime: 2021-12-23 15:32:53
+ * @LastEditTime: 2021-12-23 16:48:23
  * @Description: 
  */
 
@@ -52,6 +52,10 @@ const useTags = () => {
       setTags([...tags, { id: createId(), name: tagName }])
     }
   }
+  const getName = (id: number) => {
+    const tag = tags.filter(t => t.id === id)[0]
+    return tag.name ?? ''
+  }
   return {
     tags,
     setTags,
@@ -59,7 +63,8 @@ const useTags = () => {
     updateTag,
     findTagIndex,
     deleteTag,
-    addTag
+    addTag,
+    getName
   }
 }
 
