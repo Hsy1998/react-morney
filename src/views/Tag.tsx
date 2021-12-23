@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-22 18:53:35
- * @LastEditTime: 2021-12-22 18:55:38
+ * @LastEditTime: 2021-12-23 14:35:35
  * @Description: 
  */
 import Button from 'components/Button'
@@ -11,7 +11,7 @@ import Input from 'components/Input'
 import Layout from 'components/Layout'
 import { useTags } from 'hooks/useTags'
 import React from 'react'
-import { useParams } from 'react-router'
+import { useParams,useHistory } from 'react-router'
 import styled from 'styled-components'
 
 type Params = {
@@ -38,6 +38,7 @@ const Tag: React.FC = () => {
   const { id } = useParams<Params>()
   const tag = findTag(parseInt(id))
   const tagConent = (tag: { id: number, name: string }) => {
+  
     return (
       <>
         <Inputwrapper>
@@ -51,10 +52,14 @@ const Tag: React.FC = () => {
       </>
     )
   }
-  return (
+  const history = useHistory()
+  const onClickBack = () => {
+    history.goBack()
+  }
+     return (
     <Layout>
       <Topbar>
-        <Icon name="left" />
+        <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
         <Icon />
       </Topbar>

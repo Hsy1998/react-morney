@@ -1,20 +1,33 @@
 /*
  * @Author: H.
  * @Date: 2021-12-22 18:26:01
- * @LastEditTime: 2021-12-22 19:02:41
+ * @LastEditTime: 2021-12-23 15:32:53
  * @Description: 
  */
 
 import { createId } from "lib/createId";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUpdate } from "./useUpdate";
 
-const defaultTags = [
-  { id: createId(), name: '衣' },
-  { id: createId(), name: '食' },
-  { id: createId(), name: '住' },
-  { id: createId(), name: '行' }]
 const useTags = () => {
-  const [tags, setTags] = useState<{ id: number, name: string }[]>(defaultTags)
+  const [tags, setTags] = useState<{ id: number, name: string }[]>([])
+  useEffect(() => {
+    let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
+    if (localTags.length === 0) {
+      localTags = [
+        { id: createId(), name: '衣' },
+        { id: createId(), name: '食' },
+        { id: createId(), name: '住' },
+        { id: createId(), name: '行' }
+      ]
+    }
+    setTags(localTags)
+  }, [])
+
+  useUpdate(() => {
+    window.localStorage.setItem('tags', JSON.stringify(tags))
+  }, [tags]) // 组件挂载时执行
+
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0]
   const findTagIndex = (id: number) => {
     let result = -1
@@ -26,20 +39,18 @@ const useTags = () => {
     }
     return result
   }
-  const updateTag = (id: number, obj: { name: string }) => {
-    const index = findTagIndex(id)
-    // 深拷贝
-    const tagsClone = JSON.parse(JSON.stringify(tags))
-    // 把 深拷贝 的第 index 删掉， 换成 {id: id, name: obj.name}
-    tagsClone.splice(index, 1, { id: id, name: obj.name })
-    setTags(tagsClone)
+  const updateTag = (id: number, { name }: { name: string }) => {
+    setTags(tags.map(tag => tag.id === id ? { id, name } : tag))
   }
 
   const deleteTag = (id: number) => {
-    const index = findTagIndex(id)
-    const tagsClone = JSON.parse(JSON.stringify(tags))
-    tagsClone.splice(index, 1)
-    setTags(tagsClone)
+    setTags(tags.filter(tag => tag.id !== id))
+  }
+  const addTag = () => {
+    const tagName = window.prompt('请输入新标签的名称')
+    if (tagName !== null && tagName !== '') {
+      setTags([...tags, { id: createId(), name: tagName }])
+    }
   }
   return {
     tags,
@@ -47,7 +58,8 @@ const useTags = () => {
     findTag,
     updateTag,
     findTagIndex,
-    deleteTag
+    deleteTag,
+    addTag
   }
 }
 

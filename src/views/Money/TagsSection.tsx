@@ -1,11 +1,10 @@
 /*
  * @Author: H.
  * @Date: 2021-12-21 08:39:44
- * @LastEditTime: 2021-12-22 18:27:59
+ * @LastEditTime: 2021-12-23 14:41:34
  * @Description: 
  */
 import { useTags } from "hooks/useTags";
-import { createId } from "lib/createId";
 import React from "react";
 import styled from "styled-components";
 
@@ -47,14 +46,9 @@ type Props = {
   onChange: (selected: number[]) => void // 父组件更新标签
 }
 const TagsSection: React.FC<Props> = (props) => {
-  const {tags, setTags} = useTags()
+  const {tags, addTag} = useTags()
   const selectedTagIds = props.value
-  const onAddTag = () => {
-    const tagName = window.prompt('请输入新标签的名称')
-    if (tagName !== null) {
-      setTags([...tags, {id: createId(),name:tagName}])
-    }
-  }
+ 
 
   const onToggleTag = (tagId: number) => {
     const index = props.value.indexOf(tagId)
@@ -64,7 +58,7 @@ const TagsSection: React.FC<Props> = (props) => {
       props.onChange([...selectedTagIds, tagId])
     }
   }
-  const getClass = (tagId: number) => props.value.indexOf(tagId) >= 0 ? 'selected' : ''
+  const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
   return (
     <Wrapper>
       <ol>
@@ -75,7 +69,7 @@ const TagsSection: React.FC<Props> = (props) => {
               className={getClass(tag.id)}
             >{tag.name}</li>)}
       </ol>
-      <button onClick={onAddTag}>新增标签</button>
+      <button onClick={addTag}>新增标签</button>
     </Wrapper>
   )
 }

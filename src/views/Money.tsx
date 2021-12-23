@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-21 08:39:44
- * @LastEditTime: 2021-12-21 17:10:30
+ * @LastEditTime: 2021-12-23 16:19:34
  * @Description: 
  */
 import Layout from '../components/Layout';
@@ -11,23 +11,30 @@ import NotesSection from './Money/NotesSection';
 import CategorySection from './Money/CategorySection';
 import NumberPadSection from './Money/NumberPadSection';
 import styled from 'styled-components';
+import useRecords from 'hooks/useRecords';
 
 const MyLayout = styled(Layout)`
 display: flex;
 flex-direction: column;
 `
-
+const defaultFormData = {
+  tagIds: [] as number[],
+  note: '',
+  category: '-' as "-" | "+",
+  amount: 0
+}
 function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number[],
-    note: '',
-    category: '-' as "-" | "+",
-    amount: 0
-  })
+  const [selected, setSelected] = useState(defaultFormData)
 
   // Partial --> 包含typeof selected部分类型
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj })
+  }
+const {addRecord} = useRecords()
+
+  const submit = () => {
+    if(addRecord(selected)) alert('保存成功')
+    setSelected(defaultFormData)
   }
   return (
     <MyLayout>
@@ -41,7 +48,7 @@ function Money() {
         onChange={(category) => onChange({ category })}>
       </CategorySection>
       <NumberPadSection value={selected.amount}
-        onOk={() => { }}
+        onOk={submit}
         onChange={(amount) => onChange({ amount })}>
       </NumberPadSection>
     </MyLayout>
