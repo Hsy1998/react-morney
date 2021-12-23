@@ -4,10 +4,10 @@ import { useUpdate } from "./useUpdate"
 /*
  * @Author: H.
  * @Date: 2021-12-23 15:49:08
- * @LastEditTime: 2021-12-23 16:18:24
+ * @LastEditTime: 2021-12-23 19:20:07
  * @Description: 
  */
-type RecordItem = {
+export type RecordItem = {
   tagIds: number[]
   note: string
   category: '+' | '-'
@@ -23,7 +23,7 @@ const useRecords = () => {
   }, [])
   useUpdate(() => {
     window.localStorage.setItem('records', JSON.stringify(records))
-  }, [records])
+  }, records)
   const addRecord = (newRecord: newRecordItem) => {
     if(newRecord.amount <= 0) {
         alert('金额不能为0')

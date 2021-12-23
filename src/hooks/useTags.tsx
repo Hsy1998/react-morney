@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-22 18:26:01
- * @LastEditTime: 2021-12-23 16:48:23
+ * @LastEditTime: 2021-12-23 19:20:14
  * @Description: 
  */
 
@@ -26,7 +26,7 @@ const useTags = () => {
 
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags))
-  }, [tags]) // 组件挂载时执行
+  }, tags) // 组件挂载时执行
 
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0]
   const findTagIndex = (id: number) => {
