@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-21 08:39:44
- * @LastEditTime: 2021-12-22 18:57:34
+ * @LastEditTime: 2021-12-24 15:21:06
  * @Description: 
  */
 import React from 'react';
@@ -15,6 +15,9 @@ import Tag from 'views/Tag';
 
 const AppWrapper = styled.div`
    color: #333;
+    max-width: 500px;
+    margin: 0 auto;
+
 `
 
 function App() {

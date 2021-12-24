@@ -1,3 +1,9 @@
+/*
+ * @Author: H.
+ * @Date: 2021-12-24 15:19:42
+ * @LastEditTime: 2021-12-24 15:45:10
+ * @Description: 
+ */
 import Nav from './Nav';
 import React,{ useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -10,6 +16,9 @@ const Wrapper = styled.div`
 const Main = styled.div`
   flex-grow: 1;
   overflow: auto;
+  &::webkit-scrollbar: {
+    display: none;
+  }
 `;
 
 type Props = {

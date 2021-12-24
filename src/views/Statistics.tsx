@@ -1,7 +1,7 @@
 /*
  * @Author: H.
  * @Date: 2021-12-21 08:39:44
- * @LastEditTime: 2021-12-23 18:55:08
+ * @LastEditTime: 2021-12-24 17:12:37
  * @Description: 
  */
 import Layout from '../components/Layout';
@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import useRecords, { RecordItem } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import day from 'dayjs'
+import BaseEcharts from 'components/echarts/BaseEchart';
 import transfromDate from 'lib/transfromDate';
-
 const CategoryWrapper = styled.div`
 background: white
 `
@@ -34,6 +34,8 @@ font-size: 18px;
 line-height: 20px;
 padding: 10px 16px;
 `
+
+
 function Statistics() {
   const [category, setCategroy] = useState<'-' | '+'>('-')
   const { records } = useRecords()
@@ -53,8 +55,6 @@ function Statistics() {
     if(a[0] < b[0]) return 1
     return 0
   })
-
-
   return (
     <Layout>
       <CategoryWrapper>
