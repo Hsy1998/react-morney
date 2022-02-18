@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import useRecords, { RecordItem } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import day from 'dayjs'
-import BaseEcharts from 'components/echarts/BaseEchart';
+// import BaseEcharts from 'components/echarts/BaseEchart';
 import transfromDate from 'lib/transfromDate';
 const CategoryWrapper = styled.div`
 background: white
